@@ -93,6 +93,10 @@ func UpdateTask(DB *sql.DB, ctx context.Context, update_query string, args []any
 func RemoveTask(DB *sql.DB, ctx context.Context, user_id int, task_uuid string) (int64, error) {
 	res, err := DB.ExecContext(ctx, "DELETE FROM tasks WHERE user_id = $1 AND id = $2", user_id, task_uuid)
 
+	if err != nil {
+		return 0, err
+	}
+
 	rows_affected, _ := res.RowsAffected()
 
 	return rows_affected, err

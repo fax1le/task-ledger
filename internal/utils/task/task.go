@@ -35,7 +35,7 @@ var allowedOrderBy = map[string]string{
 	"completed":       "completed",
 	"completed desc":  "completed desc",
 	"due_date":        "due_date",
-	"due_date desc ":  "due_date desc",
+	"due_date desc":  "due_date desc",
 	"category":        "category",
 	"category desc":   "category desc",
 	"created_at":      "created_at",
@@ -90,9 +90,17 @@ func GetDynamicQuery(user_id int, r *http.Request) (string, []any, error) {
 		param := query_params["due"]
 		param = strings.TrimSpace(param)
 
+		layout := "2006-01-02 15:04:05"
+
+		date, err := time.Parse(layout, param)
+
+		if err != nil {
+			return "", args, err
+		}
+
 		due_str := fmt.Sprintf(" due_date <= $%d", arg_ind)
 		condition_query += due_str + " AND"
-		args = append(args, param)
+		args = append(args, date)
 		arg_ind++
 	}
 
