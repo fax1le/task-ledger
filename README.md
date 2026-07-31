@@ -8,6 +8,7 @@ cookie.
 ## System Design
 
 ```mermaid
+%%{init: {'flowchart':{'nodeSpacing':45,'rankSpacing':70,'padding':12,'htmlLabels':true}}}%%
 flowchart LR
     Client --> MW["Middleware<br><small>logging · auth</small>"]
     MW --> Router
