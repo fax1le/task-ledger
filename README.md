@@ -1,4 +1,4 @@
-# Task Manager
+# Task Ledger
 
 A per-user task tracking API written in Go, backed by PostgreSQL and Redis.
 Authentication is session-based rather than token-based: sessions are
